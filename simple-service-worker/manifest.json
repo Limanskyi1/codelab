@@ -1,0 +1,9 @@
+{
+  "name": "Offline Demo",
+  "short_name": "Offline",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "description": "Simple Service Worker Demo",
+  "icons": []
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Service Worker</title>
+  </head>
+  <body>
+    <div id="status"></div>
+    <div id="counter"></div>
+    <div id="increment">+</div>
+    <div id="decrement">-</div>
+    <script>
+      const status = document.getElementById("status");
+      const counter = document.getElementById("counter");
+      const incrementButton = document.getElementById("increment");
+      const decrementButton = document.getElementById("decrement");
+
+      let counterValue = 0;
+
+      const isServiceWorkerSupported = () => navigator.serviceWorker;
+      const isOnline = () => navigator.onLine;
+
+      
+      if (isServiceWorkerSupported()) {
+        navigator.serviceWorker
+          .register("./sw.js")
+          .then(() => console.log("✅ SW зарегистрирован"))
+          .catch((err) => console.error("❌ Ошибка регистрации:", err));
+      }
+
+      counter.textContent = counterValue;
+      status.textContent = isOnline() ? "Online" : "Offline";
+
+      const incrementCounter = () => {
+        counterValue += 1;
+        counter.textContent = counterValue;
+      };
+      const decrementCounter = () => {
+        counterValue -= 1;
+        counter.textContent = counterValue;
+      };
+
+      incrementButton.addEventListener("click", incrementCounter);
+      decrementButton.addEventListener("click", decrementCounter);
+    </script>
+  </body>
+</html>
